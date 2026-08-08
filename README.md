@@ -10,6 +10,15 @@ subscription behavior in `Elsa.Caching.Distributed.ProtoActor` 3.7.1. It contain
 
 ## Build
 
+Start the PostgreSQL database:
+
+```shell
+docker compose up -d
+```
+
+The Compose service uses the same `elsa` database, username, password, and port as
+the development connection string.
+
 ```shell
 dotnet build Elsa.ProtoActor.Repro.sln
 ```
