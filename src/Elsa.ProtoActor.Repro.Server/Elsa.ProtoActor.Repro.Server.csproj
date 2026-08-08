@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Elsa" Version="3.7.1" />
+    <PackageReference Include="Elsa.Actors.ProtoActor" Version="3.7.1" />
+    <PackageReference Include="Elsa.Caching.Distributed.ProtoActor" Version="3.7.1" />
+    <PackageReference Include="Elsa.Persistence.EFCore.PostgreSql" Version="3.7.1" />
+    <PackageReference Include="Elsa.Workflows.Api" Version="3.7.1" />
+    <PackageReference Include="Elsa.Workflows.Runtime.ProtoActor" Version="3.7.1" />
+    <PackageReference Include="Proto.Cluster.Dashboard" Version="1.8.0" />
+  </ItemGroup>
+
+</Project>
