@@ -1,5 +1,8 @@
 using Elsa;
+using Elsa.Actors.ProtoActor.Features;
+using Elsa.Actors.ProtoActor.HostedServices;
 using Elsa.Extensions;
+using Elsa.Features.Services;
 using Elsa.Persistence.EFCore.Extensions;
 using Elsa.Persistence.EFCore.Modules.Management;
 using Elsa.Persistence.EFCore.Modules.Runtime;
@@ -38,7 +41,7 @@ builder.Services.AddElsa(elsa =>
         })
         .UseWorkflowsApi()
         .UseDistributedCache(distributedCache => distributedCache.UseProtoActor())
-        .UseProtoActor(protoActor =>
+        .Configure<FixedProtoActorFeature>(protoActor =>
         {
             protoActor.ClusterName = "elsa-protoactor-cache-repro";
             protoActor.ConfigureRemoteConfig = _ => RemoteConfig
@@ -65,3 +68,12 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 await app.RunAsync();
+
+// ISSUE: https://github.com/elsa-workflows/elsa-extensions/issues/167
+class FixedProtoActorFeature(IModule module) : ProtoActorFeature(module)
+{
+    public override void ConfigureHostedServices()
+    {
+        Module.ConfigureHostedService<StartClusterMember>(-100);
+    }
+};
