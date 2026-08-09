@@ -15,6 +15,7 @@
     <PackageReference Include="Elsa.Workflows.Api" Version="3.7.1" />
     <PackageReference Include="Elsa.Workflows.Runtime.ProtoActor" Version="3.7.1" />
     <PackageReference Include="Proto.Cluster.Dashboard" Version="1.8.0" />
+    <PackageReference Include="Proto.Cluster.Kubernetes" Version="1.8.0" />
   </ItemGroup>
 
   <ItemGroup>
