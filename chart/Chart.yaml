@@ -1,0 +1,6 @@
+apiVersion: v2
+name: elsa-protoactor-repro
+description: Local Minikube deployment for the Elsa Proto.Actor cache reproducer
+type: application
+version: 0.1.0
+appVersion: "3.7.1"

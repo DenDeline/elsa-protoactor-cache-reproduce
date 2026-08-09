@@ -1,0 +1,14 @@
+The Elsa Proto.Actor cache reproducer is installed with {{ .Values.replicaCount }} replica(s).
+
+Keep the Minikube tunnel running in a separate terminal:
+
+  minikube tunnel --bind-address=127.0.0.1
+
+Then open:
+
+  http://{{ .Values.ingress.host }}
+
+Check the deployment:
+
+  kubectl --namespace {{ .Release.Namespace }} get pods,service,ingress
+  kubectl --namespace {{ .Release.Namespace }} rollout status deployment/{{ include "elsa-protoactor-repro.fullname" . }}

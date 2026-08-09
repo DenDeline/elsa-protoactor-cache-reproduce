@@ -1,0 +1,72 @@
+replicaCount: 2
+
+image:
+  repository: elsa-protoactor-repro
+  pullPolicy: Never
+  tag: local
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+rbac:
+  create: true
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1654
+  runAsGroup: 1654
+  fsGroup: 1654
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources: {}
+
+database:
+  connectionString: Host=host.minikube.internal;Port=5432;Database=elsa;Username=elsa;Password=elsa
+
+protoActor:
+  # Empty uses the Helm release fullname, which keeps separate releases isolated.
+  clusterName: ""
+
+probes:
+  startup:
+    failureThreshold: 60
+    periodSeconds: 5
+    timeoutSeconds: 3
+  liveness:
+    failureThreshold: 3
+    periodSeconds: 15
+    timeoutSeconds: 5
+  readiness:
+    failureThreshold: 3
+    periodSeconds: 5
+    timeoutSeconds: 3
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-name: elsa-protoactor-affinity
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+  host: elsa-protoactor-repro.localhost
+  path: /
+  pathType: Prefix
+  tls: []

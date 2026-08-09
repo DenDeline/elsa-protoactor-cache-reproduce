@@ -74,6 +74,14 @@ The liveness probe fails only after the actor system shuts down. Readiness and s
 return HTTP 503 until the member joins its cluster, and while it is stopping. They do not
 test PostgreSQL, Kubernetes watch health, peer count, or remote reachability.
 
+### Deploy on local Minikube
+
+The dependency-free Helm chart in [`chart`](chart/README.md) deploys two server replicas,
+connects them to the PostgreSQL Compose service through `host.minikube.internal`, grants
+the required Proto.Actor pod RBAC, configures all three probes, and exposes the dashboard
+through nginx ingress. Follow the chart README for the image build, Helm install, and
+macOS `minikube tunnel` commands.
+
 ## Later integration seam
 
 The host reads `ConnectionStrings:Default`, which a later Aspire AppHost can inject.
